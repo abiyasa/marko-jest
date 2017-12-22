@@ -14,22 +14,24 @@ const MARKO_MODULES_TO_MOCK = {
 
 /* eslint global-require: 1 */
 /* eslint import/no-dynamic-require: 1 */
-exports.initComponent = function (componentFullPath) {
+exports.initComponent = function initComponent(componentFullPath) {
   // hijack marko/dist requires to load browser-side modules on server-side
   Object.keys(MARKO_MODULES_TO_MOCK).forEach((markoModule) => {
     jest.mock(`marko/dist/${markoModule}`, () => require.requireActual(`marko/dist/${MARKO_MODULES_TO_MOCK[markoModule]}`));
   });
 
   // require the component to test
+  // eslint-disable-next-line import/no-dynamic-require, global-require
   const component = require(componentFullPath);
 
   // init marko component
+  // eslint-disable-next-line global-require
   require('marko/components').init();
 
   return component;
 };
 
-exports.createTestSandbox = function () {
+exports.createTestSandbox = function createTestSandbox() {
   const el = document.createElement('div');
   el.id = 'test-sandbox';
   document.body.appendChild(el);
