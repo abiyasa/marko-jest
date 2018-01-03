@@ -1,0 +1,16 @@
+class {
+  onCreate() {
+    this.state = {
+      clicked: false
+    };
+  }
+
+  toggleButton() {
+    this.state.clicked = !this.state.clicked;
+  }
+}
+
+<button class="btn" on-click('toggleButton')>
+  <span if(state.clicked)>DONE</span>
+  <span else>Click me</span>
+</button>

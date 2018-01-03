@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`testing split-files component on rendering should render correctly 1`] = `
+Array [
+  <button
+    class="btn"
+  >
+    <span>
+      Click me
+    </span>
+  </button>,
+]
+`;
+
+exports[`testing split-files component on triggering click handler should update the element 1`] = `
+Array [
+  <button
+    class="btn"
+  >
+    <span>
+      DONE
+    </span>
+  </button>,
+]
+`;
