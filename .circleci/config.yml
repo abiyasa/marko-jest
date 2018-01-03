@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/marko-jest
     docker:
-      - image: circleci/node:8.9.-
+      - image: circleci/node:8.9.0
     steps:
       - checkout
       - restore_cache:
