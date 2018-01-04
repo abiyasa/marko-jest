@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`single-file with styled component on rendering should render correctly 1`] = `
+Array [
+  <button
+    class="btn"
+  >
+    <span>
+      Click me
+    </span>
+  </button>,
+]
+`;
+
+exports[`single-file with styled component on triggering click handler should update the element 1`] = `
+Array [
+  <button
+    class="btn toggled"
+  >
+    <span>
+      DONE
+    </span>
+  </button>,
+]
+`;

@@ -1,8 +1,8 @@
 const path = require('path');
 const { initComponent, createTestSandbox } = require('../test-utils');
 
-describe('testing split-files component', () => {
-  const componentClass = initComponent(path.resolve(__dirname, './resources/split-files-simple/index.marko'));
+describe('multi-file component', () => {
+  const componentClass = initComponent(path.resolve(__dirname, './resources/multi-file-simple/index.marko'));
 
   let testSandbox;
   let component;

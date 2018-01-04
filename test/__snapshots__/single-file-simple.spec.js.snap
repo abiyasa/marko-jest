@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`testing single-file component on rendering should render correctly 1`] = `
+exports[`single-file component on rendering should render correctly 1`] = `
 Array [
   <button
     class="btn"
@@ -12,7 +12,7 @@ Array [
 ]
 `;
 
-exports[`testing single-file component on triggering click handler should update the element 1`] = `
+exports[`single-file component on triggering click handler should update the element 1`] = `
 Array [
   <button
     class="btn"

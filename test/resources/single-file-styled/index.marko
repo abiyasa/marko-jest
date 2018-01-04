@@ -1,0 +1,25 @@
+style {
+  .btn {
+    color: #eee;
+  }
+  .btn.toggled {
+    color: #ff8080;
+  }
+}
+
+class {
+  onCreate() {
+    this.state = {
+      toggled: false
+    };
+  }
+
+  toggleButton() {
+    this.state.toggled = !this.state.toggled;
+  }
+}
+
+<button class={btn: true, toggled: state.toggled} on-click('toggleButton')>
+  <span if(state.toggled)>DONE</span>
+  <span else>Click me</span>
+</button>
