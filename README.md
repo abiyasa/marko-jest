@@ -1,4 +1,4 @@
-## Marko Jest
+## Marko Jest &middot; [![Coverage Status](https://coveralls.io/repos/github/abiyasa/marko-jest/badge.svg?branch=master)](https://coveralls.io/github/abiyasa/marko-jest?branch=master) [![CircleCI Status](https://circleci.com/gh/abiyasa/marko-jest/tree/master.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/abiyasa/marko-jest/tree/master)
 
 Jest Marko transformer & rendering test utility.
 
