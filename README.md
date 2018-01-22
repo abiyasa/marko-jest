@@ -314,3 +314,7 @@ Planned new features and improvements:
 ## Contributing
 
 Contributing guidelines is still WIP but you're welcome to contribute by creating issues or Pull Request.
+
+## License
+
+MIT
