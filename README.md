@@ -8,7 +8,7 @@ Contains transformer and other rendering test utility for testing [Marko](https:
 
 ## Setup
 
-1. Add `marko-jest` to your dev dependencies. You could do it by `yarn add marko-jest --dev` or `npm install marko-jest --save-dev`
+1. Add `marko-jest` to your dev dependencies. You could do it by `yarn add marko-jest --dev` or `npm install marko-jest --save-dev`. Note that marko-jest requires at least Jest version 22.
 
 2. Register marko preprocessor/transformer to your Jest setup so Jest will know how to process Marko file. Add the following lines to your `package.json`:
 
@@ -21,7 +21,6 @@ Contains transformer and other rendering test utility for testing [Marko](https:
     "transform": {
       "^.+\\.marko$": "<rootDir>/node_modules/marko-jest/preprocessor.js"
     },
-    "setupTestFrameworkScriptFile": "<rootDir>/test/jest-setup.js",
     ...
   },
 
