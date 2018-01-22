@@ -9,39 +9,8 @@ Contains transformer and other rendering test utility for testing [Marko](https:
 ## Setup
 
 1. Add `marko-jest` to your dev dependencies. You could do it by `yarn add marko-jest --dev` or `npm install marko-jest --save-dev`
-2. Make sure you have JSDOM setup for your Jest. Marko-jest only works with JSDOM at the moment. You can setup JSDOM by adding these lines to your `test/jest-setup.js`:
 
-```javascript
-// test/jest-setup.js
-const { JSDOM } = require('jsdom');
-
-// setup JSDOM
-const jsdom = new JSDOM('<!doctype html><html><body></body></html>', { runScripts: 'dangerously' });
-const { window } = jsdom;
-
-global.window = window;
-global.document = window.document;
-global.navigator = {
-  userAgent: 'node.js',
-};
-copyProps(window, global);
-
-function copyProps(src, target) {
-  const props = Object.getOwnPropertyNames(src)
-    .filter(prop => typeof target[prop] === 'undefined')
-    .map(prop => Object.getOwnPropertyDescriptor(src, prop));
-  Object.defineProperties(target, props);
-}
-```
-
-or you can simply just add `require('marko-jest/jsdom-setup)`:
-
-```javascript
-// test/jest-setup.js
-require('marko-jest/jsdom-setup');
-```
-
-3. Register marko preprocessor/transformer to your Jest setup so Jest will know how to process Marko file. Add the following lines to your `package.json`:
+2. Register marko preprocessor/transformer to your Jest setup so Jest will know how to process Marko file. Add the following lines to your `package.json`:
 
 ```json
 // package.json
