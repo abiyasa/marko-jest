@@ -33,20 +33,6 @@ describe('test-utils', () => {
         testSandbox.reset();
         expect(document.body.contains(testSandbox.el)).not.toBeTruthy();
       });
-
-      it('should remove all elements inside the test sandbox element', () => {
-        const testSandbox = createTestSandbox();
-
-        testSandbox.el.innerHTML = `
-          <div>Test1</div>
-          <div>Test2</div>
-          <div>Test3</div>
-        `;
-        expect(testSandbox.el.innerHTML).not.toEqual('');
-
-        testSandbox.reset();
-        expect(testSandbox.el.innerHTML).toEqual('');
-      });
     });
   });
 });

@@ -54,10 +54,6 @@ exports.createTestSandbox = function createTestSandbox() {
      * Remove test component from sandbox from DOM
      */
     reset() {
-      while (this.el.firstChild) {
-        this.el.removeChild(this.el.firstChild);
-      }
-
       document.body.removeChild(this.el);
     },
   };
