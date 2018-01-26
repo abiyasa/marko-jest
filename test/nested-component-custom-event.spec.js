@@ -38,14 +38,12 @@ describe('component with nested components', () => {
       expect(el).toBeDefined();
     });
 
-    // NOTE: nested component still not supported
-    it.skip('should able to get nested components with getComponents()', () => {
+    it('should able to get nested components with getComponents()', () => {
       const buttons = component.getComponents('secret-item');
       expect(buttons).toHaveLength(MODEL.items.length);
     });
 
-    // NOTE: nested component still not supported
-    it.skip('should able to get a nested component with getComponent()', () => {
+    it('should able to get a nested component with getComponent()', () => {
       const video = component.getComponent('award-video');
       expect(video).toBeDefined();
     });

@@ -1,6 +1,6 @@
 describe('preprocessor', () => {
   const mockedMarkoCompiler = {
-    compileFile: jest.fn()
+    compileFileForBrowser: jest.fn()
   };
   jest.mock('marko/compiler', () => mockedMarkoCompiler);
 
@@ -10,6 +10,6 @@ describe('preprocessor', () => {
   it('should compile Marko file with ouput to vdom', () => {
     const filepath = 'src/file/path';
     preprocessor.process('source', filepath);
-    expect(mockedMarkoCompiler.compileFile).toHaveBeenCalledWith(filepath, { output: 'vdom' });
+    expect(mockedMarkoCompiler.compileFileForBrowser).toHaveBeenCalledWith(filepath);
   });
 });

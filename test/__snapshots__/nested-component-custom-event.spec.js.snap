@@ -2,41 +2,26 @@
 
 exports[`component with nested components given default model should render correctly 1`] = `
 Array [
-  <h1
-    data-marko-key="title b1"
-  >
+  <h1>
     Click any button below and win an ipod!
   </h1>,
-  <!--M#b1-award-video-->,
   <p />,
-  <p />,
-  <!--M/b1-award-video-->,
   <ul>
-    <!--M#b1-secret-item[]-->
     <li>
       click me
     </li>
-    <!--M/b1-secret-item[]-->
-    <!--M#b1-secret-item[]_1-->
     <li>
       click me
     </li>
-    <!--M/b1-secret-item[]_1-->
-    <!--M#b1-secret-item[]_2-->
     <li>
       click me
     </li>
-    <!--M/b1-secret-item[]_2-->
-    <!--M#b1-secret-item[]_3-->
     <li>
       click me
     </li>
-    <!--M/b1-secret-item[]_3-->
-    <!--M#b1-secret-item[]_4-->
     <li>
       click me
     </li>
-    <!--M/b1-secret-item[]_4-->
   </ul>,
 ]
 `;
