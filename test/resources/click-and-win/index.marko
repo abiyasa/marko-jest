@@ -1,0 +1,9 @@
+<h1 key="title">Click any button below and win an ipod!</h1>
+
+<fake-video key="award-video" />
+
+<ul>
+  <for(item in input.items)>
+    <list-item key="secret-item[]" value=item.value label=item.label onSelect('handleSelect') />
+  </for>
+</ul>
