@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`component with custom event on rendering should render correctly 1`] = `
+Array [
+  <li>
+    one
+  </li>,
+]
+`;
