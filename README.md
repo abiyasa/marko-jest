@@ -301,15 +301,15 @@ The test sandbox is basically an empty div container where the tested component 
 
 ## Known Issues
 
-* Component with nesting components
-  - The nesting components are rendered properly, however the instances are not properly created. Therefore, when parent component calls `getComponent()` or `getComponents()`, it will get undefined. The workaround is to stub/mock the parent's component `getComponent()` with a mocked component.
+* Fixed on [version 3](https://github.com/abiyasa/marko-jest/releases/tag/v3.0.0). ~~Component with nesting components~~
+  - ~~The nesting components are rendered properly, however the instances are not properly created. Therefore, when parent component calls `getComponent()` or `getComponents()`, it will get undefined. The workaround is to stub/mock the parent's component `getComponent()` with a mocked component.~~
 
 ## Roadmap
 
 Planned new features and improvements:
 
 * API simplification: remove test sandbox.
-* Support shallow and deep rendering
+* Support shallow and deep rendering. Currently, the default behaviour is deep rendering. Shallow rendering is not supported yet.
 
 ## Contributing
 
