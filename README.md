@@ -4,7 +4,7 @@ Jest Marko transformer & rendering test utility.
 
 ## What is this?
 
-Contains transformer and other rendering test utility for testing [Marko](https://markojs.com/) component with Jest & JSDOM
+Contains transformer and other rendering test utility for testing [Marko 4](https://markojs.com/) component with Jest & JSDOM. 
 
 ## Setup
 
