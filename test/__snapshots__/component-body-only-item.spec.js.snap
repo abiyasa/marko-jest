@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`body-only component on rendering NON-body-only mode should update the element 1`] = `
+Array [
+  test,
+]
+`;
+
+exports[`body-only component on rendering body-only mode should render correctly 1`] = `
+Array [
+  <span>
+    test
+  </span>,
+]
+`;
