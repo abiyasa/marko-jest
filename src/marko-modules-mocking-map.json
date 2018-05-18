@@ -1,0 +1,40 @@
+{
+  "marko/dist/components/legacy": {
+    "./defineWidget-legacy.js": "./defineWidget-legacy-browser.js",
+    "./helpers.js": "./helpers-browser.js",
+    "./index.js": "./index-browser.js"
+  },
+  "marko/dist/components": {
+    "./beginComponent.js": "./beginComponent-browser.js",
+    "./endComponent.js": "./endComponent-browser.js",
+    "./helpers.js": "./helpers-browser.js",
+    "./index.js": "./index-browser.js",
+    "./init-components.js": "./init-components-browser.js",
+    "./legacy/defineWidget-legacy.js": "./legacy/defineWidget-legacy-browser.js",
+    "./registry.js": "./registry-browser.js",
+    "./util.js": "./util-browser.js"
+  },
+  "marko/dist/components/taglib": {
+    "./component-globals-tag.js": "./component-globals-tag-browser.js",
+    "./getRequirePath.js": "./getRequirePath-browser.js",
+    "./init-components-tag.js": "./init-components-tag-browser.js",
+    "./preserve-tag.js": "./preserve-tag-browser.js"
+  },
+  "marko/dist/loader": {
+    "./index.js": "./index-browser.js"
+  },
+  "marko/dist": {
+    "./index.js": "./index-browser.js"
+  },
+  "marko/dist/runtime": {
+    "./nextTick": "./nextTick-browser.js"
+  },
+  "marko/dist/taglibs/async": {
+    "./client-reorder.js": "./client-reorder-browser.js",
+    "./await-reorderer-tag.js": "./noop-render.js"
+  },
+  "marko/dist/taglibs/core": {
+    "./include-text-tag.js": "./include-text-tag-browser.js",
+    "./include-html-tag.js": "./include-html-tag-browser.js"
+  }
+}
