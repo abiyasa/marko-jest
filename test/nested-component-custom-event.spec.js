@@ -30,7 +30,7 @@ describe('component with nested components', () => {
     });
 
     it('should render correctly', () => {
-      expect(component.els).toMatchSnapshot();
+      expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
     });
 
     it('should able to get nested element with getEl()', () => {

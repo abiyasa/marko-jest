@@ -46,6 +46,10 @@ exports.createTestSandbox = function createTestSandbox() {
         });
     },
 
+    getRenderedNodes() {
+      return Array.from(this.el.childNodes);
+    },
+
     /**
      * Remove test component from sandbox from DOM
      */
