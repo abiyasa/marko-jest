@@ -1,6 +1,6 @@
 {
   "name": "marko-jest",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Jest Marko transformer & render test utils",
   "main": "index.js",
   "repository": "git@github.com:abiyasa/marko-jest.git",
