@@ -25,7 +25,7 @@ describe('single-file component', () => {
     });
 
     it('should render correctly', () => {
-      expect(component.els).toMatchSnapshot();
+      expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
     });
   });
 
@@ -38,7 +38,7 @@ describe('single-file component', () => {
     });
 
     it('should update the element', () => {
-      expect(component.els).toMatchSnapshot();
+      expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
     });
 
     it('should change the button label', () => {

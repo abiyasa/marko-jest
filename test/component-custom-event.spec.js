@@ -22,7 +22,7 @@ describe('component with custom event', () => {
     });
 
     it('should render correctly', () => {
-      expect(component.els).toMatchSnapshot();
+      expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
     });
 
     describe('when clicked', () => {

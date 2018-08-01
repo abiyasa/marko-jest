@@ -9,6 +9,7 @@
   "private": false,
   "scripts": {
     "lint": "eslint ./*.js ./src/**/*.js ./test/**/*.js",
+    "create:mockmap": "node ./scripts/generate-marko-module-map",
     "test": "jest --no-cache"
   },
   "keywords": [
@@ -23,21 +24,21 @@
   ],
   "peerDependencies": {
     "jest": "^22.1.4",
-    "marko": "^4.5.6"
+    "marko": "^4.9.0"
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
     "eslint": "^4.10.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
+    "glob": "^7.1.2",
     "jest": "^22.1.4",
-    "marko": "^4.5.6"
+    "marko": "^4.9.0"
   },
   "jest": {
     "transform": {
       "^.+\\.marko$": "<rootDir>/src/preprocessor.js"
     },
-    "mapCoverage": true,
     "collectCoverageFrom": [
       "src/**/*.{js}",
       "!src/**/*.marko.js",

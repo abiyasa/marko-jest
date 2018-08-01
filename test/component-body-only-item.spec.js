@@ -1,11 +1,10 @@
 const path = require('path');
 const { initComponent, createTestSandbox } = require('../test-utils');
 
-describe('single-file with styled component', () => {
-  const componentClass = initComponent(path.resolve(__dirname, './resources/single-file-styled/index.marko'));
+describe('body-only component', () => {
+  const componentClass = initComponent(path.resolve(__dirname, './resources/body-only-item/index.marko'));
 
   let testSandbox;
-  let component;
 
   beforeEach(() => {
     testSandbox = createTestSandbox();
@@ -15,9 +14,9 @@ describe('single-file with styled component', () => {
     testSandbox.reset();
   });
 
-  describe('on rendering', () => {
+  describe('on rendering body-only mode', () => {
     beforeEach(async () => {
-      component = await testSandbox.renderComponent(componentClass, {});
+      await testSandbox.renderComponent(componentClass, { showSpan: true, text: 'test' });
     });
 
     it('should render correctly', () => {
@@ -25,12 +24,9 @@ describe('single-file with styled component', () => {
     });
   });
 
-  describe('on triggering click handler', () => {
+  describe('on rendering NON-body-only mode', () => {
     beforeEach(async () => {
-      component = await testSandbox.renderComponent(componentClass, {});
-
-      component.el.click();
-      component.update();
+      await testSandbox.renderComponent(componentClass, { showSpan: false, text: 'test' });
     });
 
     it('should update the element', () => {

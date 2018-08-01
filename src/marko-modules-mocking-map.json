@@ -1,0 +1,22 @@
+{
+  "marko/dist/components/legacy/defineWidget-legacy.js": "marko/dist/components/legacy/defineWidget-legacy-browser.js",
+  "marko/dist/components/legacy/helpers.js": "marko/dist/components/legacy/helpers-browser.js",
+  "marko/dist/components/legacy/index.js": "marko/dist/components/legacy/index-browser.js",
+  "marko/dist/components/beginComponent.js": "marko/dist/components/beginComponent-browser.js",
+  "marko/dist/components/endComponent.js": "marko/dist/components/endComponent-browser.js",
+  "marko/dist/components/helpers.js": "marko/dist/components/helpers-browser.js",
+  "marko/dist/components/index.js": "marko/dist/components/index-browser.js",
+  "marko/dist/components/init-components.js": "marko/dist/components/init-components-browser.js",
+  "marko/dist/components/registry.js": "marko/dist/components/registry-browser.js",
+  "marko/dist/components/util.js": "marko/dist/components/util-browser.js",
+  "marko/dist/components/taglib/component-globals-tag.js": "marko/dist/components/taglib/component-globals-tag-browser.js",
+  "marko/dist/components/taglib/getRequirePath.js": "marko/dist/components/taglib/getRequirePath-browser.js",
+  "marko/dist/components/taglib/init-components-tag.js": "marko/dist/components/taglib/init-components-tag-browser.js",
+  "marko/dist/components/taglib/preserve-tag.js": "marko/dist/components/taglib/preserve-tag-browser.js",
+  "marko/dist/loader/index.js": "marko/dist/loader/index-browser.js",
+  "marko/dist/index.js": "marko/dist/index-browser.js",
+  "marko/dist/taglibs/async/client-reorder.js": "marko/dist/taglibs/async/client-reorder-browser.js",
+  "marko/dist/taglibs/async/await-reorderer-tag.js": "marko/dist/taglibs/async/noop-render.js",
+  "marko/dist/taglibs/core/include-text-tag.js": "marko/dist/taglibs/core/include-text-tag-browser.js",
+  "marko/dist/taglibs/core/include-html-tag.js": "marko/dist/taglibs/core/include-html-tag-browser.js"
+}

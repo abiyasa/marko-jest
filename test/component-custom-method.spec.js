@@ -17,16 +17,16 @@ describe('component with custom methods', () => {
   });
 
   it('should render properly', () => {
-    expect(component.els).toMatchSnapshot();
+    expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
   });
 
   it('should able to call its method from the component instance', async () => {
     component.playVideo();
     component.update();
-    expect(component.els).toMatchSnapshot();
+    expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
 
     component.stopVideo();
     component.update();
-    expect(component.els).toMatchSnapshot();
+    expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
   });
 });
