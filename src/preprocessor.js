@@ -8,7 +8,7 @@ module.exports = {
     let compileOption;
     const { taglibExcludePackages } = markoJestCfg;
     if (taglibExcludePackages) {
-      taglibExcludePackages.forEach(package => compiler.taglibFinder.excludePackage(package));
+      taglibExcludePackages.forEach(pkg => compiler.taglibFinder.excludePackage(pkg));
 
       compileOption = { ignoreUnrecognizedTags: true };
     }
