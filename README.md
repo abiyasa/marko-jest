@@ -4,7 +4,7 @@ Jest Marko transformer & rendering test utility.
 
 ## What is this?
 
-Contains transformer and other rendering test utility for testing [Marko 4](https://markojs.com/) component with Jest & JSDOM. 
+Contains transformer and other rendering test utility for testing [Marko 4](https://markojs.com/) component with Jest & JSDOM.
 
 ## Requirements
 
@@ -352,6 +352,72 @@ describe('test-simple-button', () => {
 });
 ```
 
+## Shallow Rendering
+
+marko-jest can do [shallow rendering](https://reactjs.org/docs/shallow-renderer.html) on external component. If you use external Marko component module/library (such as [ebayui-core](https://github.com/eBay/ebayui-core)), you can exclude those components from being rendered deeply by adding the module name to Jest globals config `taglibExcludePackages`. marko-jest will use Marko's [`taglibFinder.excludePackage()`](https://markojs.com/docs/custom-tags/#hiding-taglibs) to prevent any components from those modules to be rendered.
+
+For example, if you want to do shallow rendering on all components from `@ebay/ebayui-core` module, add the module name to Jest globals config:
+
+```json
+// package.json
+{
+  ...
+
+  "jest": {
+    "transform": {
+      ...
+    },
+    ...
+    "globals": {
+      "marko-jest": {
+        "taglibExcludePackages": [
+          "@ebay/ebayui-core",
+          "marko-material"
+        ]
+      }
+    }
+  },
+
+  ...
+}
+```
+
+Now Marko Jest will render your component:
+
+```html
+// cta-component.marko
+<section>
+  <ebay-button priority="primary" on-click('toggleButton')>
+    PAY
+  </ebay-button>
+</section>
+```
+
+As:
+
+```html
+<section>
+  <ebay-button priority="primary">PAY</ebay-button>
+<section>
+```
+
+Instead of
+
+```html
+<section>
+  <button type="button" class="btn btn--primary">PAY</button>
+<section>
+```
+
+One of the advantages of shallow rendering is to isolate your unit test so you can focus on testing your component instead of the external ones. On the example above, if the `ebay-button` implementation has changed (e.g css class name or new attribute added), your snapshot test will not failed.
+
+### Current Limitation of marko-jest shallow rendering
+
+- The shallow rendering will affect ALL test suites, you cannot turn it on or off
+ during runtime.
+- You can only do shallow rendering on external modules. Unfortunately, you cannot do shallow rendering on component from the same project. The only workaround so far is to separate your UI component as external module (npm package) and consume it on your project.
+
+
 ## marko-jest APIs
 
 marko-jest API provides 2 APIs:
@@ -372,17 +438,15 @@ The test sandbox is basically an empty div container where the tested component 
 
 ## Known Issues
 
-* Fixed on [version 3](https://github.com/abiyasa/marko-jest/releases/tag/v3.0.0). ~~Component with nesting components~~
-  - ~~The nesting components are rendered properly, however the instances are not properly created. Therefore, when parent component calls `getComponent()` or `getComponents()`, it will get undefined. The workaround is to stub/mock the parent's component `getComponent()` with a mocked component.~~
-* Does not support excluding specific tag yet (through Marko `excludeDir()` or `excludePackage()`), see https://github.com/abiyasa/marko-jest/issues/1
 * Failed rendering Marko component with custom transformer
+* Limited support of shallow rendering, see Shallow Rendering above or https://github.com/abiyasa/marko-jest/issues/1
 
 ## Roadmap
 
 Planned new features and improvements:
 
 * API simplification: remove test sandbox.
-* Support shallow and deep rendering. Currently, the default behaviour is deep rendering. Shallow rendering is not supported yet.
+* Better support of shallow and deep rendering.
 
 ## Contributing
 
