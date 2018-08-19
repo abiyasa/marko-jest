@@ -16,6 +16,21 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
+"@ebay/ebayui-core@^0.9.1":
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/@ebay/ebayui-core/-/ebayui-core-0.9.1.tgz#31dd2a16b4eb19ebd8faa03d822c51ec160f11b9"
+  dependencies:
+    lodash.get "^4.4.2"
+    lodash.set "^4.3.2"
+    makeup-expander "~0.4.0"
+    makeup-focusables "~0.0.3"
+    makeup-key-emitter "~0.0.3"
+    makeup-keyboard-trap "~0.1.0"
+    makeup-prevent-scroll-keys "~0.0.2"
+    makeup-roving-tabindex "~0.0.5"
+    makeup-screenreader-trap "~0.0.5"
+    nodelist-foreach-polyfill "^1.2.0"
+
 abab@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -709,6 +724,10 @@ cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   resolved "https://registry.yarnpkg.com/cssstyle/-/cssstyle-0.2.37.tgz#541097234cb2513c83ceed3acddc27ff27987d54"
   dependencies:
     cssom "0.3.x"
+
+custom-event-polyfill@^0.3.0, custom-event-polyfill@~0.3:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/custom-event-polyfill/-/custom-event-polyfill-0.3.0.tgz#99807839be62edb446b645832e0d80ead6fa1888"
 
 dashdash@^1.12.0:
   version "1.14.1"
@@ -2317,6 +2336,14 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+
+lodash.set@^4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
+
 lodash.sortby@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/lodash.sortby/-/lodash.sortby-4.7.0.tgz#edd14c824e2cc9c1e0b0a1b42bb5210516a42438"
@@ -2351,6 +2378,67 @@ makeerror@1.0.x:
   resolved "https://registry.yarnpkg.com/makeerror/-/makeerror-1.0.11.tgz#e01a5c9109f2af79660e4e8b9587790184f5a96c"
   dependencies:
     tmpl "1.0.x"
+
+makeup-exit-emitter@~0.0, makeup-exit-emitter@~0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/makeup-exit-emitter/-/makeup-exit-emitter-0.0.4.tgz#26482e73db3ef6ef5f8ac2c3c21e8197488fd458"
+  dependencies:
+    custom-event-polyfill "~0.3"
+    makeup-next-id "~0.0"
+
+makeup-expander@~0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/makeup-expander/-/makeup-expander-0.4.0.tgz#8f810be697dc1c2dc279a43e442b74f7cf414292"
+  dependencies:
+    custom-event-polyfill "~0.3"
+    makeup-exit-emitter "~0.0.4"
+    makeup-focusables "~0.0.3"
+    makeup-next-id "~0.0.2"
+
+makeup-focusables@~0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/makeup-focusables/-/makeup-focusables-0.0.3.tgz#e30f36a99beb7c5166daafb8f823fefcc7a551fa"
+
+makeup-key-emitter@~0.0, makeup-key-emitter@~0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/makeup-key-emitter/-/makeup-key-emitter-0.0.3.tgz#4fe16127cce749a785f4e2538800415d267fd356"
+  dependencies:
+    custom-event-polyfill "~0.3"
+
+makeup-keyboard-trap@~0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/makeup-keyboard-trap/-/makeup-keyboard-trap-0.1.0.tgz#0ef20b6672b877771a3c24f998740158165f1d00"
+  dependencies:
+    custom-event-polyfill "~0.3"
+    makeup-focusables "~0.0.3"
+
+makeup-navigation-emitter@~0.0:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/makeup-navigation-emitter/-/makeup-navigation-emitter-0.0.6.tgz#befcc18d31ee125c332307fb7c304cddbfab4bda"
+  dependencies:
+    custom-event-polyfill "^0.3.0"
+    makeup-exit-emitter "~0.0"
+    makeup-key-emitter "~0.0"
+
+makeup-next-id@~0.0, makeup-next-id@~0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/makeup-next-id/-/makeup-next-id-0.0.2.tgz#70f19812b0b5cb8d5f0f7f78719179ea4b61a0ef"
+
+makeup-prevent-scroll-keys@~0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/makeup-prevent-scroll-keys/-/makeup-prevent-scroll-keys-0.0.2.tgz#1c255e5f97968ee3586c0aa55d0d8b3df8318501"
+
+makeup-roving-tabindex@~0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/makeup-roving-tabindex/-/makeup-roving-tabindex-0.0.5.tgz#5bd855216eed374846b5d26466488ee0b6aeed0e"
+  dependencies:
+    makeup-navigation-emitter "~0.0"
+
+makeup-screenreader-trap@~0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/makeup-screenreader-trap/-/makeup-screenreader-trap-0.0.5.tgz#f5f21d0da15092905c3febf83bb03bf7adde037b"
+  dependencies:
+    custom-event-polyfill "~0.3"
 
 map-cache@^0.2.2:
   version "0.2.2"
@@ -2580,6 +2668,10 @@ node-pre-gyp@^0.10.0:
     rimraf "^2.6.1"
     semver "^5.3.0"
     tar "^4"
+
+nodelist-foreach-polyfill@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/nodelist-foreach-polyfill/-/nodelist-foreach-polyfill-1.2.0.tgz#92bca739959af68271734087e48474c2fef5152c"
 
 nopt@^4.0.1:
   version "4.0.1"
