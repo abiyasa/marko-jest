@@ -1,4 +1,5 @@
 const glob = require('glob');
+const { isDebug } = require("marko/env");
 const { promisify } = require('util');
 const fs = require('fs');
 const path = require('path');
@@ -7,9 +8,9 @@ const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 const fileExistsAsync = promisify(fs.exists);
 const NODE_MODULES_PATH = './node_modules';
-const MARKO_DIST = 'marko/dist';
+const MARKO_DIST = `marko/${isDebug ? 'src' : 'dist'}`;
 const BASE_PATH = `${NODE_MODULES_PATH}/${MARKO_DIST}`;
-const OUTPUT_PATH = './src/marko-modules-mocking-map.json';
+const OUTPUT_PATH = './marko-modules-mocking-map.json';
 
 /**
  * Generates mapping for Marko dependecies, so
@@ -33,7 +34,7 @@ const OUTPUT_PATH = './src/marko-modules-mocking-map.json';
   }
 })();
 
-// recursively gets list of all package.json inside marko/dist
+// recursively gets list of all package.json inside marko/(dist|src)
 function getPackageFiles() {
   const options = {};
 
@@ -65,7 +66,7 @@ async function processPackageFile(packageFile) {
 /**
  * Flatten browser map from:
  *
- * "marko/dist/runtime": {
+ * "marko/(dist|src)/runtime": {
  *   "./nextTick": "./nextTick-browser.js",
  *   "./index.js": "./index-browser.js"
  * }
@@ -73,8 +74,8 @@ async function processPackageFile(packageFile) {
  * to:
  *
  * {
- *   "marko/dist/runtime/nextTick": "marko/dist/runtime/nextTick-browser.js",
- *   "marko/dist/runtime/index.js": "marko/dist/runtime/index-browser.js"
+ *   "marko/(dist|src)/runtime/nextTick": "marko/(dist|src)/runtime/nextTick-browser.js",
+ *   "marko/(dist|src)/runtime/index.js": "marko/(dist|src)/runtime/index-browser.js"
  * }
  * @param {*} folderName
  * @param {*} browserMap
