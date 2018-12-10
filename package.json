@@ -40,6 +40,7 @@
     "transform": {
       "^.+\\.marko$": "<rootDir>/src/preprocessor.js"
     },
+    "browser": true,
     "collectCoverageFrom": [
       "src/**/*.{js}",
       "!src/**/*.marko.js",
