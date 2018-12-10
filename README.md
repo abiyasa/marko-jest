@@ -8,7 +8,7 @@ Contains transformer and other rendering test utility for testing [Marko 4](http
 
 ## Requirements
 
-- Jest: ^22.1.4
+- Jest: ^23.1.4
 - Marko: ^4.9.0
 
 
@@ -17,6 +17,8 @@ Contains transformer and other rendering test utility for testing [Marko 4](http
 1. Add `marko-jest` to your dev dependencies. You could do it by `yarn add marko-jest --dev` or `npm install marko-jest --save-dev`. Note that marko-jest requires at least Jest version 22.
 
 2. Register marko preprocessor/transformer to your Jest setup so Jest will know how to process Marko file. Add the following lines to your `package.json`:
+
+3. Set `browser: true` to Jest config. This is require to render Marko component with browser-side behaviour on server (Node) environment.
 
 ```json
 // package.json
@@ -27,6 +29,7 @@ Contains transformer and other rendering test utility for testing [Marko 4](http
     "transform": {
       "^.+\\.marko$": "<rootDir>/node_modules/marko-jest/preprocessor.js"
     },
+    "browser": true,
     ...
   },
 
@@ -91,17 +94,8 @@ describe('test-button', () => {
   });
 
   describe('on rendering', () => {
-    beforeEach(() => {
-      // render component to sandbox
-      return testSandbox
-        .renderComponent(componentClass, {})
-        .then(result => {
-          component = result;
-        });
-    });
-
-    // or if you prefer async/await:
     beforeEach(async () => {
+      // render component asynchronously to sandbox
       component = await testSandbox.renderComponent(componentClass, {});
     });
 
