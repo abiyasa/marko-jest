@@ -1,32 +1,30 @@
 const path = require('path');
-const { initComponent, createTestSandbox } = require('../test-utils');
+const { init } = require('../');
+
+const { render, cleanup } = init(path.resolve(__dirname, './resources/fake-video/index.marko'));
 
 describe('component with custom methods', () => {
-  const componentClass = initComponent(path.resolve(__dirname, './resources/fake-video/index.marko'));
-
-  let testSandbox;
-  let component;
+  let renderResult;
 
   beforeEach(async () => {
-    testSandbox = createTestSandbox();
-    component = await testSandbox.renderComponent(componentClass, {});
+    renderResult = await render({});
   });
 
-  afterEach(() => {
-    testSandbox.reset();
-  });
+  afterEach(cleanup);
 
   it('should render properly', () => {
-    expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
+    expect(renderResult.getNodes()).toMatchSnapshot();
   });
 
   it('should able to call its method from the component instance', async () => {
+    const { component } = renderResult;
+
     component.playVideo();
     component.update();
-    expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
+    expect(renderResult.getNodes()).toMatchSnapshot();
 
     component.stopVideo();
     component.update();
-    expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
+    expect(renderResult.getNodes()).toMatchSnapshot();
   });
 });

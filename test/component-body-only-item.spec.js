@@ -1,36 +1,32 @@
 const path = require('path');
-const { initComponent, createTestSandbox } = require('../test-utils');
+const { init } = require('../');
+
+const { render, cleanup } = init(path.resolve(__dirname, './resources/body-only-item/index.marko'));
 
 describe('body-only component', () => {
-  const componentClass = initComponent(path.resolve(__dirname, './resources/body-only-item/index.marko'));
-
-  let testSandbox;
-
-  beforeEach(() => {
-    testSandbox = createTestSandbox();
-  });
-
-  afterEach(() => {
-    testSandbox.reset();
-  });
+  afterEach(cleanup);
 
   describe('on rendering body-only mode', () => {
+    let renderResult;
+
     beforeEach(async () => {
-      await testSandbox.renderComponent(componentClass, { showSpan: true, text: 'test' });
+      renderResult = await render({ showSpan: true, text: 'test' });
     });
 
     it('should render correctly', () => {
-      expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
+      expect(renderResult.getNodes()).toMatchSnapshot();
     });
   });
 
   describe('on rendering NON-body-only mode', () => {
+    let renderResult;
+
     beforeEach(async () => {
-      await testSandbox.renderComponent(componentClass, { showSpan: false, text: 'test' });
+      renderResult = await render({ showSpan: false, text: 'test' });
     });
 
     it('should update the element', () => {
-      expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
+      expect(renderResult.getNodes()).toMatchSnapshot();
     });
   });
 });

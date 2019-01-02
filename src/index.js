@@ -11,50 +11,51 @@ function loadMarkoBrowserDependencies() {
   });
 }
 
+const mountedContainers = new Set();
+
 /* eslint global-require: 1 */
 /* eslint import/no-dynamic-require: 1 */
-exports.initComponent = function initComponent(componentFullPath) {
+exports.init = function init(componentFullPath) {
   loadMarkoBrowserDependencies();
 
   // require the component to test
   // eslint-disable-next-line import/no-dynamic-require, global-require
-  const component = require(componentFullPath);
+  const componentClass = require(componentFullPath);
 
   // init marko component
   // eslint-disable-next-line global-require
   require('marko/components').init();
 
-  return component;
-};
-
-exports.createTestSandbox = function createTestSandbox() {
-  const el = document.createElement('div');
-  el.id = 'test-sandbox';
-  document.body.appendChild(el);
-
   return {
-    el,
+    componentClass,
 
-    /**
-     * Render component into sandbox
-     */
-    renderComponent(component, input) {
-      return component.render(input)
+    render(input) {
+      // create container
+      const container = document.createElement('div');
+      container.id = 'marko-jest-sandbox';
+      document.body.appendChild(container);
+      mountedContainers.add(container);
+
+      return componentClass.render(input)
         .then((result) => {
-          result.appendTo(this.el);
-          return result.getComponent();
+          result.appendTo(container);
+
+          return {
+            container,
+            component: result.getComponent(),
+            getNodes: () => Array.from(container.childNodes)
+          };
         });
     },
 
-    getRenderedNodes() {
-      return Array.from(this.el.childNodes);
-    },
+    cleanup() {
+      mountedContainers.forEach((container) => {
+        if (container.parentNode === document.body) {
+          document.body.removeChild(container);
+        }
 
-    /**
-     * Remove test component from sandbox from DOM
-     */
-    reset() {
-      document.body.removeChild(this.el);
-    },
+        mountedContainers.delete(container);
+      });
+    }
   };
 };

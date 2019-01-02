@@ -1,8 +1,9 @@
 const path = require('path');
-const { initComponent, createTestSandbox } = require('../test-utils');
+const { init } = require('../');
+
+const { render, cleanup } = init(path.resolve(__dirname, './resources/click-and-win/index.marko'));
 
 describe('component with nested components', () => {
-  const componentClass = initComponent(path.resolve(__dirname, './resources/click-and-win/index.marko'));
   const MODEL = {
     items: [
       { label: 'click me', value: 0 },
@@ -12,25 +13,19 @@ describe('component with nested components', () => {
       { label: 'click me', value: 0 }
     ]
   };
-
-  let testSandbox;
+  let renderResult;
   let component;
 
-  beforeEach(() => {
-    testSandbox = createTestSandbox();
-  });
-
-  afterEach(() => {
-    testSandbox.reset();
-  });
+  afterEach(cleanup);
 
   describe('given default model', () => {
     beforeEach(async () => {
-      component = await testSandbox.renderComponent(componentClass, MODEL);
+      renderResult = await render(MODEL);
+      ({ component } = renderResult);
     });
 
     it('should render correctly', () => {
-      expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
+      expect(renderResult.getNodes()).toMatchSnapshot();
     });
 
     it('should able to get nested element with getEl()', () => {
