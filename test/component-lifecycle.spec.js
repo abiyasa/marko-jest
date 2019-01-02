@@ -7,7 +7,7 @@ describe('component lifecycle', () => {
   afterEach(cleanup);
 
   it('should trigger onMount', async () => {
-    const spyOnMount = jest.spyOn(componentClass.Component.prototype, 'onMount');
+    const spyOnMount = jest.spyOn(componentClass.prototype, 'onMount');
     await render({});
 
     expect(spyOnMount).toHaveBeenCalled();
@@ -16,7 +16,7 @@ describe('component lifecycle', () => {
   });
 
   it('should trigger onDestroy', async () => {
-    const spyOnDestroy = jest.spyOn(componentClass.Component.prototype, 'onDestroy');
+    const spyOnDestroy = jest.spyOn(componentClass.prototype, 'onDestroy');
     const { component } = await render({});
     component.destroy();
 

@@ -20,14 +20,14 @@ exports.init = function init(componentFullPath) {
 
   // require the component to test
   // eslint-disable-next-line import/no-dynamic-require, global-require
-  const componentClass = require(componentFullPath);
+  const renderable = require(componentFullPath);
 
   // init marko component
   // eslint-disable-next-line global-require
   require('marko/components').init();
 
   return {
-    componentClass,
+    componentClass: renderable.Component,
 
     render(input) {
       // create container
@@ -36,7 +36,7 @@ exports.init = function init(componentFullPath) {
       document.body.appendChild(container);
       mountedContainers.add(container);
 
-      return componentClass.render(input)
+      return renderable.render(input)
         .then((result) => {
           result.appendTo(container);
 

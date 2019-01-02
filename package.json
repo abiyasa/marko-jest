@@ -3,6 +3,7 @@
   "version": "5.0.0-alpha.0",
   "description": "Jest Marko transformer & render test utils",
   "main": "index.js",
+  "types": "index.d.ts",
   "repository": "git@github.com:abiyasa/marko-jest.git",
   "author": "abiyasa <ilham.suhardi@gmail.com>",
   "license": "MIT",
