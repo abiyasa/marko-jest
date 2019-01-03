@@ -1,7 +1,7 @@
 const path = require('path');
-const { init } = require('../');
+const { init, cleanup } = require('../');
 
-const { render, cleanup } = init(path.resolve(__dirname, './resources/body-only-item/index.marko'));
+const { render } = init(path.resolve(__dirname, './resources/body-only-item/index.marko'));
 
 describe('body-only component', () => {
   afterEach(cleanup);

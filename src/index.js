@@ -15,7 +15,7 @@ const mountedContainers = new Set();
 
 /* eslint global-require: 1 */
 /* eslint import/no-dynamic-require: 1 */
-exports.init = function init(componentFullPath) {
+function init(componentFullPath) {
   loadMarkoBrowserDependencies();
 
   // require the component to test
@@ -30,11 +30,7 @@ exports.init = function init(componentFullPath) {
     componentClass: renderable.Component,
 
     render(input) {
-      // create container
-      const container = document.createElement('div');
-      container.id = 'marko-jest-sandbox';
-      document.body.appendChild(container);
-      mountedContainers.add(container);
+      const container = createContainer();
 
       return renderable.render(input)
         .then((result) => {
@@ -48,14 +44,30 @@ exports.init = function init(componentFullPath) {
         });
     },
 
-    cleanup() {
-      mountedContainers.forEach((container) => {
-        if (container.parentNode === document.body) {
-          document.body.removeChild(container);
-        }
-
-        mountedContainers.delete(container);
-      });
-    }
+    cleanup
   };
+};
+
+function createContainer() {
+  const container = document.createElement('div');
+  container.id = 'marko-jest-sandbox-' + Math.floor(Math.random() * 10000);
+  document.body.appendChild(container);
+  mountedContainers.add(container);
+
+  return container;
+}
+
+function cleanup() {
+  mountedContainers.forEach((container) => {
+    if (container.parentNode === document.body) {
+      document.body.removeChild(container);
+    }
+
+    mountedContainers.delete(container);
+  });
+}
+
+module.exports = {
+  init,
+  cleanup
 };

@@ -24,12 +24,7 @@ export interface InitResult {
    * appended to document.body.
    * It should be used with cleanup.
    */
-  render: (input: any) => Promise<RenderResult>,
-
-  /**
-   * Unmounts test container that were mounted with render()
-   */
-  cleanup: () => void
+  render: (input: any) => Promise<RenderResult>
 }
 
 /**
@@ -42,3 +37,8 @@ export interface InitResult {
  * const { render, cleanup } = init(path.resolve(__dirname, '../index.marko'));
  */
 export function init(componentFullPath: string): InitResult
+
+/**
+ * Unmounts test container that were mounted with render()
+ */
+export function cleanup(): void

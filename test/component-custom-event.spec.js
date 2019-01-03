@@ -1,7 +1,7 @@
 const path = require('path');
-const { init } = require('../');
+const { init, cleanup } = require('../');
 
-const { render, cleanup } = init(path.resolve(__dirname, './resources/list-item/index.marko'));
+const { render } = init(path.resolve(__dirname, './resources/list-item/index.marko'));
 
 describe('component with custom event', () => {
   const MODEL = { label: 'one', value: 1 };

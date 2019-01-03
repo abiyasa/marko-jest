@@ -1,7 +1,7 @@
 const path = require('path');
-const { init } = require('../');
+const { init, cleanup } = require('../');
 
-const { render, cleanup } = init(path.resolve(__dirname, './resources/single-file-styled/index.marko'));
+const { render } = init(path.resolve(__dirname, './resources/single-file-styled/index.marko'));
 
 describe('single-file with styled component', () => {
   let renderResult;

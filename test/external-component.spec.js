@@ -1,7 +1,7 @@
 const path = require('path');
-const { init } = require('../');
+const { init, cleanup } = require('../');
 
-const { render, cleanup } = init(path.resolve(__dirname, './resources/external-component/index.marko'));
+const { render } = init(path.resolve(__dirname, './resources/external-component/index.marko'));
 
 describe('external-component', () => {
   let renderResult;

@@ -1,7 +1,7 @@
 const path = require('path');
-const { init } = require('../');
+const { init, cleanup } = require('../');
 
-const { componentClass, render, cleanup } = init(path.resolve(__dirname, './resources/multi-file-lifecycle/index.marko'));
+const { componentClass, render } = init(path.resolve(__dirname, './resources/multi-file-lifecycle/index.marko'));
 
 describe('component lifecycle', () => {
   afterEach(cleanup);
