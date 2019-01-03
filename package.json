@@ -1,6 +1,6 @@
 {
   "name": "marko-jest",
-  "version": "5.0.0-alpha.1",
+  "version": "5.0.0-alpha.2",
   "description": "Jest Marko transformer & render test utils",
   "main": "index.js",
   "types": "index.d.ts",
