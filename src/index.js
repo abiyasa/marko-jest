@@ -42,9 +42,7 @@ function init(componentFullPath) {
             getNodes: () => Array.from(container.childNodes)
           };
         });
-    },
-
-    cleanup
+    }
   };
 };
 
