@@ -401,16 +401,16 @@ At the moment, you can't easily require Marko component on Node.js with JSDOM. B
 
 `init` function will 'trick' Marko to require a component on Node.js as if it's done on browser. Therefore, the required component will have all browser-side features, including component rendering.
 
-The `init` function will return an object `InitResult` which has:
+The `init` function will return an object **`InitResult`** which has:
 
-  * property `componentClass: Component`, the Class of require/init-ed Marko Component. Quite useful if you want to spy on Marko component lifecycle method.
-  * function `render(input: any): Promise<RenderResult>`: Asynchronously render the component using the given input. This will return a promise which will be resolved with an instance of `RenderResult`.
+  * property **`componentClass: Component`**, the Class of require/init-ed Marko Component. Quite useful if you want to spy on Marko component lifecycle method.
+  * function **`render(input: any): Promise<RenderResult>`**: Asynchronously render the component using the given input. This will return a promise which will be resolved with an instance of `RenderResult`.
 
-The `RenderResult` is the result of component rendering which has:
+The **`RenderResult`** is the result of component rendering which has:
 
-  * property `component: Component`: the rendered component instance. Use this instance to access any Marko component [properties](https://markojs.com/docs/components/#properties) or [methods](https://markojs.com/docs/components/#methods).
-  * property `container: HTMLElement`: the test container element, which is a div element. Behind the scene, marko-jest `render` function automatically creates a test container and renders the component inside it.
-  * method `getNodes(): HTMLElement[]`: return the list of any rendered HTML elements. This method is better than Marko's `getEl()` and `getEls()` which does not return any non-element nodes such as **text and comment nodes**. If you want to access element & non-elements (e.g for snapshot testing), you can use `getNodes()` which will return array of all Nodes, including HTML elements, text, and comment nodes.
+  * property **`component: Component`**: the rendered component instance. Use this instance to access any Marko component [properties](https://markojs.com/docs/components/#properties) or [methods](https://markojs.com/docs/components/#methods).
+  * property **`container: HTMLElement`**: the test container element, which is a div element. Behind the scene, marko-jest `render` function automatically creates a test container and renders the component inside it.
+  * method **`getNodes(): HTMLElement[]`**: return the list of any rendered HTML elements. This method is better than Marko's `getEl()` and `getEls()` which does not return any non-element nodes such as **text and comment nodes**. If you want to access element & non-elements (e.g for snapshot testing), you can use `getNodes()` which will return array of all Nodes, including HTML elements, text, and comment nodes.
 
 
 ### `cleanup(): void`
