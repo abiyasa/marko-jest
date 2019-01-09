@@ -1,24 +1,14 @@
 const path = require('path');
-const { initComponent, createTestSandbox } = require('../test-utils');
+const { init, cleanup } = require('../');
+
+const { componentClass, render } = init(path.resolve(__dirname, './resources/multi-file-lifecycle/index.marko'));
 
 describe('component lifecycle', () => {
-  const componentClass = initComponent(path.resolve(__dirname, './resources/multi-file-lifecycle/index.marko'));
-
-  let testSandbox;
-  let component;
-
-  beforeEach(() => {
-    testSandbox = createTestSandbox();
-  });
-
-  afterEach(() => {
-    testSandbox.reset();
-  });
+  afterEach(cleanup);
 
   it('should trigger onMount', async () => {
-    const spyOnMount = jest.spyOn(componentClass.Component.prototype, 'onMount');
-
-    component = await testSandbox.renderComponent(componentClass, {});
+    const spyOnMount = jest.spyOn(componentClass.prototype, 'onMount');
+    await render({});
 
     expect(spyOnMount).toHaveBeenCalled();
 
@@ -26,8 +16,8 @@ describe('component lifecycle', () => {
   });
 
   it('should trigger onDestroy', async () => {
-    const spyOnDestroy = jest.spyOn(componentClass.Component.prototype, 'onDestroy');
-    component = await testSandbox.renderComponent(componentClass, {});
+    const spyOnDestroy = jest.spyOn(componentClass.prototype, 'onDestroy');
+    const { component } = await render({});
     component.destroy();
 
     expect(spyOnDestroy).toHaveBeenCalled();

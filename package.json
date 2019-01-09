@@ -1,8 +1,9 @@
 {
   "name": "marko-jest",
-  "version": "4.2.0",
+  "version": "5.0.0-alpha.2",
   "description": "Jest Marko transformer & render test utils",
   "main": "index.js",
+  "types": "index.d.ts",
   "repository": "git@github.com:abiyasa/marko-jest.git",
   "author": "abiyasa <ilham.suhardi@gmail.com>",
   "license": "MIT",

@@ -1,25 +1,29 @@
 ## Marko Jest &middot; [![Coverage Status](https://coveralls.io/repos/github/abiyasa/marko-jest/badge.svg?branch=master)](https://coveralls.io/github/abiyasa/marko-jest?branch=master) [![CircleCI Status](https://circleci.com/gh/abiyasa/marko-jest/tree/master.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/abiyasa/marko-jest/tree/master)
 
-Jest Marko transformer & rendering test utility.
+Jest Marko transformer and rendering test utility.
 
 ## What is this?
 
-Contains transformer and other rendering test utility for testing [Marko 4](https://markojs.com/) component with Jest & JSDOM.
+Transformer and rendering test library for [Marko 4](https://markojs.com/) component with Jest & JSDOM.
+
+- Renders Marko component on JSDOM
+- Supports rendering and client-side behaviour testing
+- Snapshot testing
+- TypeScript support
 
 ## Requirements
 
-- Jest: ^22.1.4
+- Jest: 23.x
 - Marko: ^4.9.0
-
 
 ## Setup
 
-1. Add `marko-jest` to your dev dependencies. You could do it by `yarn add marko-jest --dev` or `npm install marko-jest --save-dev`. Note that marko-jest requires at least Jest version 22.
+1. Add `marko-jest` to your dev dependencies. You could do it by `yarn add marko-jest --dev` or `npm install marko-jest --save-dev`.
 
-2. Register marko preprocessor/transformer to your Jest setup so Jest will know how to process Marko file. Add the following lines to your `package.json`:
+1. Register marko preprocessor/transformer on your Jest config. This allows Jest to process and compile Marko file. Add the following lines to the Jest transform section:
 
 ```json
-// package.json
+// package.json or jest config
 {
   ...
 
@@ -34,104 +38,81 @@ Contains transformer and other rendering test utility for testing [Marko 4](http
 }
 ```
 
-## Usage
+## Quick Start
 
-There are several steps on testing a component with marko-jest `test-utils`:
+These are a quick steps to test a Marko component with marko-jest:
 
-1. Require the component you want to test by using `initComponent`. This is the only way to 'require' Marko component on test file, which will return the component class.
+1. Require marko-jest module and use the `init` function to initiate the Marko component you want to test. This is the way to 'require' Marko component on test files.
 
-```javascript
-// __tests__/component.spec.js
-import { initComponent, createTestSandbox } from 'marko-jest/test-utils';
+1. The `init` function will return `render` function which you can use to render the initiated Marko component.
 
-describe('test-button', () => {
-  const componentClass = initComponent(path.resolve(__dirname, '../index.marko'));
+    ```javascript
+    // __tests__/component.spec.js
+    import { init } from 'marko-jest';
+    // or const { init } = require('marko-jest');
 
-  ...
-});
-```
+    // init() requires full path to Marko component
+    const componentPath = path.resolve(__dirname, '../index.marko');
+    const { render } = init(componentPath);
 
-2. Create a test sandbox. The test sandbox is actual an HTML container (div) where we render & create a component instance.
+    describe('test-button', () => {
+      ...
+    });
+    ```
 
-```javascript
-// __tests__/component.spec.js
-import { initComponent, createTestSandbox } from 'marko-jest/test-utils';
+1. The `render` function returns `RenderResult` object which allows you to get the component instance. Use the component instance to access its [properties](https://markojs.com/docs/components/#properties) (e.g `el`, `els`, or `state`) or [methods](https://markojs.com/docs/components/#methods) (e.g `getEl()`, `update()`, `rerender()`) for testing.
 
-describe('test-button', () => {
-  let testSandbox;
+    ```javascript
+    // __tests__/component.spec.js
+    import { init, cleanup } from 'marko-jest';
 
-  beforeEach(() => {
-    testSandbox = createTestSandbox();
-  });
+    const componentPath = path.resolve(__dirname, '../index.marko');
+    const { render } = init(componentPath);
 
-  afterEach(() => {
-    testSandbox.reset();
-  });
+    describe('test-button', () => {
+      let renderResult;
 
-  ...
-});
-```
+      afterEach(cleanup);
 
-3. Using the component class, you render the component using test sandbox's `renderComponent()`. It will return an instance of the component, which is a normal Marko component with its [properties](https://markojs.com/docs/components/#properties)(e.g `state`, `el`, `els`) and [methods](https://markojs.com/docs/components/#methods)(e.g `getEl()`, `update()`, `rerender()`)
+      describe('on rendering', () => {
+        const input = { label: 'Click here' };
 
-```javascript
-// __tests__/component.spec.js
-describe('test-button', () => {
-  const componentClass = initComponent(path.resolve(__dirname, '../index.marko'));
-
-  let testSandbox;
-  let component;
-
-  beforeEach(() => {
-    testSandbox = createTestSandbox();
-  });
-
-  afterEach(() => {
-    testSandbox.reset();
-  });
-
-  describe('on rendering', () => {
-    beforeEach(() => {
-      // render component to sandbox
-      return testSandbox
-        .renderComponent(componentClass, {})
-        .then(result => {
-          component = result;
+        beforeEach(async () => {
+          renderResult = await render(input);
         });
+
+        it('should render a link given default input', () => {
+          const button = renderResult.component.el.querySelector('a');
+          expect(button).toBeDefined();
+        });
+      });
     });
+    ```
 
-    // or if you prefer async/await:
-    beforeEach(async () => {
-      component = await testSandbox.renderComponent(componentClass, {});
-    });
+## Component Rendering Test
 
+One way to test a component is to test its generated HTML. You can access it from the `RenderResult` object returned by the `render` function.
 
-    it('should render a link given default input', () => {
-      const button = testSandbox.el.querySelector('a');
-      expect(button).toBeDefined();
-    });
-  });
-});
-```
-
-## How to test component rendering
-
-After rendering a component given the input data, you can test rendering by accessing the component HTML elements through:
-
-* accessing directly the test sandbox `el` property (which is a div containg all the rendered result), or
-* Marko component instance's  [`getEl(key)`](https://markojs.com/docs/components/#codegetelkey-indexcode) or [`getEls(key)`](https://markojs.com/docs/components/#codegetelskeycode)
+You can use the following methods/property from the `RenderResult` object:
+  - Property `component`: component instance. You can access the output HTML element using Marko component instance's [properties](https://markojs.com/docs/components/#properties) (such as `el` or `els`), or [methods](https://markojs.com/docs/components/#methods) (`getEl(key)` or `getEls(key)`).
+  - Property `container`: the test container element, which is a div element. Behind the scene, marko-jest `render` function automatically creates a test container and renders the component inside it.
+  - Method `getNodes`: return the list of rendered HTML elements. Usually useful for snapshot testing (see next section).
 
 Once you get the HTML element, you can use any native HTML methods to assert if a certain element or class is existed.
 
 Examples:
 
 ```javascript
-// test sandbox el (preferable)
+// container
 it('should render icon DOWN', () => {
-  const iconEl = return testSandbox.el.querySelector('.btn__icon');
-
-expect(iconEl).toBeDefined();
+  const iconEl = return renderResult.container.querySelector('.btn__icon');
   expect(iconEl.innerHTML).toContain('#svg-icon-chevron-down');
+});
+
+// component instance with property el
+it('should render a link given default input', () => {
+  const ctaLink = rendereResult.component.el.querySelector('main-cta');
+  expect(ctaLink.textContent).toBe('Shop Now');
 });
 
 // component instance with getEl() if you have key attribute inside Marko template
@@ -150,11 +131,11 @@ it('should render benefit links', () => {
 
 ## Accessing Non-Element Nodes
 
-Marko's `getEl()` and `getEls()` returns HTML elements only, which means it does not return any non-element nodes such as **text and comment nodes**. If you want to access element & non-elements (e.g for snapshot testing), you can use sandbox `getRenderedNodes()` which will return array of all Nodes, including HTML elememtns, text, and comment nodes.
+Marko's `getEl()` and `getEls()` returns HTML elements only, which means it does not return any non-element nodes such as **text and comment nodes**. If you want to access element & non-elements (e.g for snapshot testing), you can use RenderResult `getNodes()` which will return array of all Nodes, including HTML elements, text, and comment nodes.
 
-```
+```javascript
 it('should render text node', () => {
-  const nodes = testSandbox.getRenderedNodes();
+  const nodes = renderResult.getNodes();
 
   expect(nodes[0].nodeType).toEqual(Node.TEXT_NODE);
 });
@@ -162,38 +143,34 @@ it('should render text node', () => {
 
 A use case for this is you have a component which can render a text node without any HTML element as container
 
-```
+```marko
 // span-or-text-component.marko
 <span body-only-if(!input.showSpan)>
   ${input.text}
 </span>
+```
 
+```javascript
 // test-span-or-text-component.spec.js
+import { init, cleanup } from 'marko-jest';
+const { render } = init(path.resolve(__dirname, './resources/body-only-item/index.marko'));
+
 describe('span-or-text component', () => {
-  const componentClass = initComponent(path.resolve(__dirname, './resources/body-only-item/index.marko'));
+  let renderResult;
 
-  let testSandbox;
-
-  beforeEach(() => {
-    testSandbox = createTestSandbox();
-  });
-
-  afterEach(() => {
-    testSandbox.reset();
-  });
-
+  afterEach(cleanup);
 
   it('should render component as a span element', async () => {
-    await testSandbox.renderComponent(componentClass, { showSpan: true, text: 'test' });
-    const nodes = testSandbox.getRenderedNodes();
+    renderResult = await render({ showSpan: true, text: 'test' });
+    const nodes = renderResult.getNodes();
 
     expect(nodes[0].nodeName).toEqual('SPAN');
     expect(nodes[0].nodeType).toEqual(Node.ELEMENT_NODE);
   });
 
   it('should render component as a text node', async () => {
-    await testSandbox.renderComponent(componentClass, { showSpan: false, text: 'test' });
-    const nodes = testSandbox.getRenderedNodes();
+    renderResult = await render({ showSpan: false, text: 'test' });
+    const nodes = renderResult.getNodes();
 
     expect(nodes[0].nodeName).toEqual('#text');
     expect(nodes[0].nodeType).toEqual(Node.TEXT_NODE);
@@ -204,33 +181,31 @@ describe('span-or-text component', () => {
 ## Snapshot testing
 
 You can utilize Jest snapshot testing to test component rendering.
-The sandbox `getRenderedNodes()` will return array of HTML elements which we can use for Jest snapshot feature.
+The RenderResult `getNodes()` will return array of HTML elements which we can use for Jest snapshot feature.
 
 Example:
 
 ```javascript
 // __tests__/component.spec.js
+import * as path from 'path';
+import { init, cleanup } from 'marko-jest';
+
+const componentPath = path.resolve(__dirname, '../index.marko');
+const { render } = init(componentPath);
+
 describe('test-button', () => {
-  let testSandbox;
-  let component;
+  afterEach(cleanup);
 
-  // init sandbox
-  ...
+  it('should render correctly given default input', async () => {
+    const input = { label: 'Click here' };
+    const renderResult = await render(input);
 
-  describe('on rendering', () => {
-    beforeEach(() => {
-      // render component to sandbox
-      ...
-    });
-
-    it('should render correctly given default input', () => {
-      expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
-    });
+    expect(renderResult.getNodes()).toMatchSnapshot();
   });
 });
 ```
 
-## Behaviour testing
+## Behaviour Testing
 
 You can test component behaviour (e.g click handler) by triggering event though the HTML element.
 
@@ -261,27 +236,23 @@ You can access the button element and trigger the click:
 ```javascript
 // __tests__/index.spec.js
 import * as path from 'path';
-import { initComponent, createTestSandbox } from 'marko-jest/test-utils';
+import { init, cleanup } from 'marko-jest';
+
+const componentPath = path.resolve(__dirname, '../index.marko');
+const { render } = init(componentPath);
 
 describe('test-simple-button', () => {
-  const componentClass = initComponent(path.resolve(__dirname, '../index.marko'));
-
-  let testSandbox;
   let component;
 
-  beforeEach(() => {
-    testSandbox = createTestSandbox();
-  });
-
-  afterEach(() => {
-    testSandbox.reset();
-  });
+  afterEach(cleanup);
 
   describe('on rendering', () => {
     let mainButton;
 
     beforeEach(async () => {
-      component = await testSandbox.renderComponent(componentClass, { });
+      const renderResult = await render({ });
+
+      component = renderResult.component;
       mainButton = component.getEl('rootButton');
     });
 
@@ -309,33 +280,29 @@ describe('test-simple-button', () => {
 });
 ```
 
-You can also combine it with snapshot testing to test rendering:
+You can also combine it with snapshot testing:
 
 ```javascript
 import * as path from 'path';
-import { initComponent, createTestSandbox } from 'marko-jest/test-utils';
+import { init, cleanup } from 'marko-jest';
+
+const componentPath = path.resolve(__dirname, '../index.marko');
+const { render } = init(componentPath);
 
 describe('test-simple-button', () => {
-  const componentClass = initComponent(path.resolve(__dirname, '../index.marko'));
-
-  let testSandbox;
+  let renderResult;
   let component;
 
-  beforeEach(() => {
-    testSandbox = createTestSandbox();
-  });
-
-  afterEach(() => {
-    testSandbox.reset();
-  });
+  afterEach(cleanup);
 
   describe('on rendering', () => {
     beforeEach(async () => {
-      component = await testSandbox.renderComponent(componentClass, { });
+      renderResult = await render({ });
+      component = renderResult.component;
     });
 
     it('should render correctly', () => {
-      expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
+      expect(renderResult.getNodes()).toMatchSnapshot();
     });
 
     describe('when clicked', () => {
@@ -345,12 +312,16 @@ describe('test-simple-button', () => {
       });
 
       it('should update the element', () => {
-        expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
+        expect(renderResult.getNodes()).toMatchSnapshot();
       });
     });
   });
 });
 ```
+
+## TypeScript Support
+
+`marko-jest` module provides TypeScript type definition. Make sure you also install type definition for Marko by adding module `@types/marko` to your project.
 
 ## Shallow Rendering
 
@@ -382,9 +353,9 @@ For example, if you want to do shallow rendering on all components from `@ebay/e
 }
 ```
 
-Now Marko Jest will render your component:
+Now Marko Jest will render your Marko component:
 
-```html
+```marko
 // cta-component.marko
 <section>
   <ebay-button priority="primary" on-click('toggleButton')>
@@ -420,21 +391,33 @@ One of the advantages of shallow rendering is to isolate your unit test so you c
 
 ## marko-jest APIs
 
-marko-jest API provides 2 APIs:
-  * `initComponent`: This is the only way to 'require' Marko component on test file.
+marko-jest API provides 2 high level functions: `init` and `cleanup`.
 
-    At the moment, you can't easily require Marko component on Node.js with JSDOM. By default, when a Marko component is required on Node.js, you can only do server-side-only component. This means you can render the component, but you don't have any browser-side features (e.g render to virtual DOM, DOM event handling, or browser-side lifecycle).
+### `init(fullPathToMarkoComponent: string): InitResult`
 
-    `initComponent` will 'trick' Marko to require a component on Node.js as if it's done on browser. Therefore, the required component will have all browser-side features, including component rendering.
+This is a way to 'require' Marko component on test file. It requires full path to Marko component.
 
-  * `createTestSandbox`: Create a test sandbox, where you can render a component into.
+At the moment, you can't easily require Marko component on Node.js with JSDOM. By default, when a Marko component is required on Node.js, you can only do server-side-only component. This means you can render the component as HTML but without any browser-side features such as render to virtual DOM, DOM event handling, or browser-side lifecycle.
 
-The test sandbox is basically an empty div container where the tested component will be rendered into. It has several methods:
+`init` function will 'trick' Marko to require a component on Node.js as if it's done on browser. Therefore, the required component will have all browser-side features, including component rendering.
 
-  * `renderComponent(ComponentClass, input)`: Asynchronously render a component using the input as the data for the component. This will return a promise which will be resolved with an instance of the component.
-  * `reset()`: Empty and remove the test sandbox. This will remove the component instance as well.
-  * `getRenderedNodes()`: Return array of Nodes, including HTML and non-HTML (text & comment nodes) elements.
-  * Property `el`: You can access directly to the container HTML element using property `el`.
+The `init` function will return an object `InitResult` which has:
+
+  * property `componentClass: Component`, the Class of require/init-ed Marko Component. Quite useful if you want to spy on Marko component lifecycle method.
+  * function `render(input: any): Promise<RenderResult>`: Asynchronously render the component using the given input. This will return a promise which will be resolved with an instance of `RenderResult`.
+
+The `RenderResult` is the result of component rendering which has:
+
+  * property `component: Component`: the rendered component instance. Use this instance to access any Marko component [properties](https://markojs.com/docs/components/#properties) or [methods](https://markojs.com/docs/components/#methods).
+  * property `container: HTMLElement`: the test container element, which is a div element. Behind the scene, marko-jest `render` function automatically creates a test container and renders the component inside it.
+  * method `getNodes(): HTMLElement[]`: return the list of any rendered HTML elements. This method is better than Marko's `getEl()` and `getEls()` which does not return any non-element nodes such as **text and comment nodes**. If you want to access element & non-elements (e.g for snapshot testing), you can use `getNodes()` which will return array of all Nodes, including HTML elements, text, and comment nodes.
+
+
+### `cleanup(): void`
+
+Remove all test containers created by the `render` function. Totally recommended to call cleanup on Jest `afterEach`.
+
+For more info about marko-jest API, you can check the TypeScript type definition [here](index.d.ts)
 
 ## Known Issues
 
@@ -445,7 +428,6 @@ The test sandbox is basically an empty div container where the tested component 
 
 Planned new features and improvements:
 
-* API simplification: remove test sandbox.
 * Better support of shallow and deep rendering.
 
 ## Contributing

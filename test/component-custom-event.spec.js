@@ -1,34 +1,29 @@
 const path = require('path');
-const { initComponent, createTestSandbox } = require('../test-utils');
+const { init, cleanup } = require('../');
+
+const { render } = init(path.resolve(__dirname, './resources/list-item/index.marko'));
 
 describe('component with custom event', () => {
-  const componentClass = initComponent(path.resolve(__dirname, './resources/list-item/index.marko'));
   const MODEL = { label: 'one', value: 1 };
-
-  let testSandbox;
+  let renderResult;
   let component;
 
-  beforeEach(() => {
-    testSandbox = createTestSandbox();
-  });
-
-  afterEach(() => {
-    testSandbox.reset();
-  });
+  afterEach(cleanup);
 
   describe('on rendering', () => {
     beforeEach(async () => {
-      component = await testSandbox.renderComponent(componentClass, MODEL);
+      renderResult = await render(MODEL);
     });
 
     it('should render correctly', () => {
-      expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
+      expect(renderResult.getNodes()).toMatchSnapshot();
     });
 
     describe('when clicked', () => {
       let onSelect;
 
-      beforeEach(async () => {
+      beforeEach(() => {
+        ({ component } = renderResult);
         onSelect = jest.fn();
         component.on('select', onSelect);
 

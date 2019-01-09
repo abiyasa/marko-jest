@@ -1,40 +1,36 @@
 const path = require('path');
-const { initComponent, createTestSandbox } = require('../test-utils');
+const { init, cleanup } = require('../');
+
+const { render } = init(path.resolve(__dirname, './resources/external-component/index.marko'));
 
 describe('external-component', () => {
-  const componentClass = initComponent(path.resolve(__dirname, './resources/external-component/index.marko'));
+  let renderResult;
 
-  let testSandbox;
-  let component;
-
-  beforeEach(() => {
-    testSandbox = createTestSandbox();
-  });
-
-  afterEach(() => {
-    testSandbox.reset();
-  });
+  afterEach(cleanup);
 
   describe('on rendering', () => {
     beforeEach(async () => {
-      component = await testSandbox.renderComponent(componentClass, {});
+      renderResult = await render({});
     });
 
     it('should render correctly', () => {
-      expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
+      expect(renderResult.getNodes()).toMatchSnapshot();
     });
   });
 
   describe('on triggering click handler', () => {
+    let component;
+
     beforeEach(async () => {
-      component = await testSandbox.renderComponent(componentClass, {});
+      renderResult = await render({});
+      ({ component } = renderResult);
 
       component.el.click();
       component.update();
     });
 
     it('should update the element', () => {
-      expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
+      expect(renderResult.getNodes()).toMatchSnapshot();
     });
 
     it('should change the button label', () => {

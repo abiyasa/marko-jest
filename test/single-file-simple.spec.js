@@ -1,23 +1,18 @@
 const path = require('path');
-const { initComponent, createTestSandbox } = require('../test-utils');
+const { init, cleanup } = require('../');
+
+const { render } = init(path.resolve(__dirname, './resources/single-file-simple/index.marko'));
 
 describe('single-file component', () => {
-  const componentClass = initComponent(path.resolve(__dirname, './resources/single-file-simple/index.marko'));
-
-  let testSandbox;
+  let renderResult;
   let component;
 
-  beforeEach(() => {
-    testSandbox = createTestSandbox();
-  });
-
-  afterEach(() => {
-    testSandbox.reset();
-  });
+  afterEach(cleanup);
 
   describe('on rendering', () => {
     beforeEach(async () => {
-      component = await testSandbox.renderComponent(componentClass, {});
+      renderResult = await render({});
+      ({ component } = renderResult);
     });
 
     it('should render the component as a button', () => {
@@ -25,20 +20,21 @@ describe('single-file component', () => {
     });
 
     it('should render correctly', () => {
-      expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
+      expect(renderResult.getNodes()).toMatchSnapshot();
     });
   });
 
   describe('on triggering click handler', () => {
     beforeEach(async () => {
-      component = await testSandbox.renderComponent(componentClass, {});
+      renderResult = await render({});
+      ({ component } = renderResult);
 
       component.el.click();
       component.update();
     });
 
     it('should update the element', () => {
-      expect(testSandbox.getRenderedNodes()).toMatchSnapshot();
+      expect(renderResult.getNodes()).toMatchSnapshot();
     });
 
     it('should change the button label', () => {
