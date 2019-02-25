@@ -1,6 +1,6 @@
 {
   "name": "marko-jest",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "Jest Marko transformer & render test utils",
   "main": "index.js",
   "types": "index.d.ts",
@@ -24,7 +24,7 @@
     "jest"
   ],
   "peerDependencies": {
-    "jest": ">=22" ,
+    "jest": ">=22",
     "marko": "^4.9.0"
   },
   "devDependencies": {
