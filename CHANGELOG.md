@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.0.0] - 2019-02-25
+
+### Added
+
+- Support Marko 4.14.0
+
+### Changed
+
+- Breaking: Does not support Marko < 4.12.0
+
 ## [5.1.0] - 2019-02-25
 
 ### Added
