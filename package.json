@@ -25,7 +25,7 @@
   ],
   "peerDependencies": {
     "jest": ">=22",
-    "marko": "^4.9.0"
+    "marko": "4.9 - 4.14"
   },
   "devDependencies": {
     "@ebay/ebayui-core": "^0.9.1",
@@ -35,7 +35,7 @@
     "eslint-plugin-import": "^2.8.0",
     "glob": "^7.1.2",
     "jest": "^24.1.0",
-    "marko": "^4.9.0"
+    "marko": "^4.14.0"
   },
   "jest": {
     "transform": {

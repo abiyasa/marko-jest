@@ -2,20 +2,24 @@
 
 exports[`external-component on rendering should render correctly 1`] = `
 Array [
+  ,
   <ebay-button
     priority="primary"
   >
     Click me
   </ebay-button>,
+  ,
 ]
 `;
 
 exports[`external-component on triggering click handler should update the element 1`] = `
 Array [
+  ,
   <ebay-button
     priority="primary"
   >
     DONE
   </ebay-button>,
+  ,
 ]
 `;

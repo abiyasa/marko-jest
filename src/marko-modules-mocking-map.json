@@ -15,8 +15,8 @@
   "marko/dist/components/taglib/preserve-tag.js": "marko/dist/components/taglib/preserve-tag-browser.js",
   "marko/dist/loader/index.js": "marko/dist/loader/index-browser.js",
   "marko/dist/index.js": "marko/dist/index-browser.js",
-  "marko/dist/taglibs/async/client-reorder.js": "marko/dist/taglibs/async/client-reorder-browser.js",
-  "marko/dist/taglibs/async/await-reorderer-tag.js": "marko/dist/taglibs/async/noop-render.js",
+  "marko/dist/taglibs/core/await/client-reorder.js": "marko/dist/taglibs/core/await/client-reorder-browser.js",
+  "marko/dist/taglibs/core/await/reorderer-renderer.js": "marko/dist/taglibs/core/await/noop-render.js",
   "marko/dist/taglibs/core/include-text-tag.js": "marko/dist/taglibs/core/include-text-tag-browser.js",
   "marko/dist/taglibs/core/include-html-tag.js": "marko/dist/taglibs/core/include-html-tag-browser.js"
 }

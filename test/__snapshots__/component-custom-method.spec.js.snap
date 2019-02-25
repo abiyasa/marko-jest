@@ -2,23 +2,29 @@
 
 exports[`component with custom methods should able to call its method from the component instance 1`] = `
 Array [
+  ,
   <p>
     Enjoy the movie 
     <span>
       😎🍿
     </span>
   </p>,
+  ,
 ]
 `;
 
 exports[`component with custom methods should able to call its method from the component instance 2`] = `
 Array [
+  ,
   <p />,
+  ,
 ]
 `;
 
 exports[`component with custom methods should render properly 1`] = `
 Array [
+  ,
   <p />,
+  ,
 ]
 `;

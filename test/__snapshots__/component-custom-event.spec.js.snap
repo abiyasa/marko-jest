@@ -2,8 +2,10 @@
 
 exports[`component with custom event on rendering should render correctly 1`] = `
 Array [
+  ,
   <li>
     one
   </li>,
+  ,
 ]
 `;

@@ -2,26 +2,40 @@
 
 exports[`component with nested components given default model should render correctly 1`] = `
 Array [
+  ,
   <h1>
     Click any button below and win an ipod!
   </h1>,
+  ,
   <p />,
+  ,
   <ul>
+    
     <li>
       click me
     </li>
+    
+    
     <li>
       click me
     </li>
+    
+    
     <li>
       click me
     </li>
+    
+    
     <li>
       click me
     </li>
+    
+    
     <li>
       click me
     </li>
+    
   </ul>,
+  ,
 ]
 `;
