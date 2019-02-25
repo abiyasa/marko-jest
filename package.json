@@ -42,7 +42,7 @@
       "^.+\\.marko$": "<rootDir>/src/preprocessor.js"
     },
     "collectCoverageFrom": [
-      "src/**/*.{js}",
+      "src/**/*.js",
       "!src/**/*.marko.js",
       "!test/**",
       "!**/node_modules/**"
