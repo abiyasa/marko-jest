@@ -24,7 +24,7 @@
     "jest"
   ],
   "peerDependencies": {
-    "jest": "^22.1.4 || ^23",
+    "jest": ">=22" ,
     "marko": "^4.9.0"
   },
   "devDependencies": {
@@ -34,7 +34,7 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "glob": "^7.1.2",
-    "jest": "^23.5.0",
+    "jest": "^24.1.0",
     "marko": "^4.9.0"
   },
   "jest": {
