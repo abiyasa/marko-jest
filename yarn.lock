@@ -1577,7 +1577,7 @@ html-encoding-sniffer@^1.0.2:
   dependencies:
     whatwg-encoding "^1.0.1"
 
-htmljs-parser@^2.6.5:
+htmljs-parser@^2.6.1:
   version "2.6.5"
   resolved "https://registry.yarnpkg.com/htmljs-parser/-/htmljs-parser-2.6.5.tgz#d59ffe8026999d8de67a8e60bca064c2adb1051c"
   integrity sha512-e5skq04FESLazLExvtEuw+QoF2IbgWbYF0TE3/mCx+hJNmhuyiqdxV0A0z1zQK+Mrpi+Ecr0pB99JQvxI2u8Aw==
@@ -2636,10 +2636,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-marko@^4.14.0:
-  version "4.15.2"
-  resolved "https://registry.yarnpkg.com/marko/-/marko-4.15.2.tgz#e068e3731667dfd74425b89f2c2e3910cf764f17"
-  integrity sha512-Wn2SCjMS13q8UC+loaG6fX10NTrF4XbgXS0OafosvGu9w6XMhFuJFSUaUk1thtKMQEOKbueo/NFfg9kRbb7b/Q==
+marko@4.14.x:
+  version "4.14.25"
+  resolved "https://registry.yarnpkg.com/marko/-/marko-4.14.25.tgz#fa72fe15084595934e3e87faade10b709f086a81"
+  integrity sha512-gF5J+ahzAp4cb9REv7Llf2Rp4MQHRrkPomtxt2qp/ps9R4QilpqxPeB5YMMUFDx+a688nYb4N9TEfaukXlhVGw==
   dependencies:
     app-module-path "^2.2.0"
     argly "^1.0.0"
@@ -2654,7 +2654,7 @@ marko@^4.14.0:
     events "^1.0.2"
     events-light "^1.0.0"
     he "^1.1.0"
-    htmljs-parser "^2.6.5"
+    htmljs-parser "^2.6.1"
     lasso-caching-fs "^1.0.1"
     lasso-modules-client "^2.0.4"
     lasso-package-root "^1.0.1"
