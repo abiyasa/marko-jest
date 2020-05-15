@@ -2,6 +2,10 @@
 
 Jest Marko transformer and rendering test utility.
 
+## DEPRECATED
+
+Please use the official [@marko/jest](https://github.com/marko-js/jest)
+
 ## What is this?
 
 Transformer and rendering test library for [Marko 4](https://markojs.com/) component with Jest & JSDOM.
