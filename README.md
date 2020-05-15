@@ -1,10 +1,10 @@
 ## Marko Jest &middot; [![Coverage Status](https://coveralls.io/repos/github/abiyasa/marko-jest/badge.svg?branch=master)](https://coveralls.io/github/abiyasa/marko-jest?branch=master) [![CircleCI Status](https://circleci.com/gh/abiyasa/marko-jest/tree/master.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/abiyasa/marko-jest/tree/master)
 
-Jest Marko transformer and rendering test utility.
+[DEPRECATED] Jest Marko transformer and rendering test utility.
 
-## DEPRECATED
+## DEPRECATED ⚠
 
-Please use the official [@marko/jest](https://github.com/marko-js/jest)
+This module is deprecated and no longer maintained, in favour of the official [@marko/jest](https://github.com/marko-js/jest) 🖖
 
 ## What is this?
 
